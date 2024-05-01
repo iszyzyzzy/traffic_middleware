@@ -1,0 +1,15 @@
+prometheus_url: http://192.168.31.220:9090
+unit_type: Decimal
+limits:
+  HK bwg - CMI:
+    reset_day: 1
+    limit: 2tb
+  LA bwg - CN2GIA: 
+    reset_day: 1
+    limit: 1tb
+  JP Tuan - IIJ: 
+    reset_day: 1
+    limit: 600gb
+  SH Tencent - BGP: 
+    reset_day: 1
+    limit: 1tb
