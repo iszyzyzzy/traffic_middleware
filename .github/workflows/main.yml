@@ -38,6 +38,12 @@ jobs:
         uses: actions/checkout@master
       - name: Download Artifacts
         uses: actions/download-artifact@v4
+      - name: debug
+        run: ls -l 
+      - name: debug
+        run: ls -l traffic_middleware
+      - name: debug
+        run: ls -l traffic_middleware/artifact
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
