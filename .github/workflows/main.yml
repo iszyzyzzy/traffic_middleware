@@ -22,10 +22,12 @@ jobs:
         run: rustup target add ${{ matrix.target }}
       - name: Build
         run: cargo build --release --target ${{ matrix.target }}
+      - name: debug
+        run: ls -l target/${{ matrix.target }}/release
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          path: target/release/traffic_middleware${{ matrix.target == 'x86_64-pc-windows-gnu' && '.exe' || '' }}
+          path: target/${{ matrix.target }}/release/traffic_middleware${{ matrix.target == 'x86_64-pc-windows-gnu' && '.exe' || '' }}
   release:
     name: Release
     runs-on: ubuntu-latest
@@ -40,7 +42,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            target/x86_64-pc-windows-gnu/release/*
-            target/x86_64-unknown-linux-musl/release/*
+            traffic_middleware/*
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
