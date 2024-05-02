@@ -148,7 +148,7 @@ trait AsF64 {
 impl AsF64 for SourceResultValue {
     fn as_f64(&self) -> f64 {
         match self {
-            SourceResultValue::String(s) => s.parse().unwrap_or_else(|_| panic!("Failed to parse {} as f64", s)),
+            SourceResultValue::String(s) => s.parse().unwrap(),
             SourceResultValue::F64(f) => *f,
         }
     }
@@ -251,8 +251,7 @@ async fn get_precent(
 #[launch]
 fn rocket() -> _ {
     let config = read_config();
-    let proxy = reqwest::Proxy::http("http://127.0.0.1:9000").unwrap();
-    let http_client = reqwest::Client::builder().proxy(proxy).build().unwrap();
+    let http_client = reqwest::Client::builder().build().unwrap();
     rocket::build()
         .mount("/", routes![index])
         .mount("/", routes![get_data])
